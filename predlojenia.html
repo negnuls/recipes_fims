@@ -1,0 +1,109 @@
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta name="anguard" content="width=device-width, initial-scale=1">
+	<title>Рецепты из сериала "Отчаянные домохозяйки"</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<header>
+			<h1>Кулинарные рецепты из произведений кинематографа</h1>
+		</header>
+        <nav>
+			<div class="nav-container"> 
+                <a href="index.html" class="back-bth">Главная</a>
+				<a href="kitchen.html" class="nav-link">Сериал "Кухня"</a>
+				<a href="housewives.html" class="nav-link">Сериал "Отчаянные домохозяйки"</a>
+				<a href="harrypotter.html" class="nav-link">Фильмы "Гарри Поттер"</a>
+				<a href="playlist.html" class="nav-link">Плейлист</a>
+			</div>
+		</nav>
+
+ <div id="feedback-content" class="hidden">
+            <h2 class="page-title">Обратная связь</h2>
+            <div class="feedback-form">
+                <div class="form-group">
+                    <label for="name">Ваше имя:</label>
+                    <input type="text" id="name" placeholder="Введите ваше имя">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Ваш email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Ваше сообщение:</label>
+                    <textarea id="message" placeholder="Напишите ваши идеи, рецепты, предложения или сообщите об ошибках..."></textarea>
+                </div>
+                <button class="submit-btn" onclick="submitFeedback()">Отправить сообщение</button>
+                <p id="feedback-message" style="text-align: center; margin-top: 1rem; color: var(--secondary);"></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Кулинарные рецепты из произведений кинематографа</p>
+    </footer>
+    <script>
+        function hideAllContent() {
+            const contentDivs = document.querySelectorAll('[id$="-content"]');
+            contentDivs.forEach(div => {
+                div.classList.add('hidden');
+            });
+        }
+
+        function showContent(contentId) {
+            hideAllContent();
+            document.getElementById(contentId).classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        /* навигация - ТОЛЬКО для ссылок с классом internal-link */
+     document.querySelectorAll('nav a.internal-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = this.getAttribute('href').substring(1);
+        if (target === 'home') {
+            hideAllContent();
+            document.getElementById('home-content').classList.remove('hidden');
+        } else {
+            showContent(target + '-content');
+        }
+    });
+});
+
+        function submitFeedback() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const feedbackMessage = document.getElementById('feedback-message');
+            
+            if (!name || !message) {
+                feedbackMessage.textContent = 'Пожалуйста, заполните все обязательные поля.';
+                feedbackMessage.style.color = '#FF6347';
+                return;
+            }
+            
+
+            feedbackMessage.textContent = 'Спасибо за ваше сообщение! Мы свяжемся с вами по почте serafimoer@mail.ru';
+            feedbackMessage.style.color = '#2E8B57';
+            
+            /* чистка формы */
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('message').value = '';
+            
+            /* скрыть */
+            setTimeout(() => {
+                feedbackMessage.textContent = '';
+            }, 5000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            hideAllContent();
+            document.getElementById('home-content').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
